@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Test_imgui_bind_SFML" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="include/;" />
+		<Option show_notes="1">
+			<notes>
+				<![CDATA[Installation guide :
+Positionnez les dossier
+configurez le linker
+copier imconfig-sfml dans imconfig
+/!\ inclure opengl32]]>
+			</notes>
+		</Option>
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Test_imgui_bind_SFML" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Test_imgui_bind_SFML" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-g" />
+			<Add option="-fexceptions" />
+			<Add directory="imgui-master/imgui-sfml-master" />
+			<Add directory="imgui-master" />
+			<Add directory="SFML-2.4.2/include" />
+		</Compiler>
+		<Linker>
+			<Add library="sfml-graphics" />
+			<Add library="sfml-window" />
+			<Add library="sfml-system" />
+			<Add library="GL" />
+			<Add library="GLU" />
+			<Add library="bluetooth" />
+			<Add directory="imgui-master/imgui-sfml-master" />
+			<Add directory="imgui-master" />
+			<Add directory="SFML-2.4.2/lib" />
+		</Linker>
+		<Unit filename="SFML-2.4.2/include/SFML/Audio.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/AlResource.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/Export.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/InputSoundFile.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/Listener.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/Music.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/OutputSoundFile.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/Sound.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundBuffer.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundBufferRecorder.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundFileFactory.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundFileReader.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundFileWriter.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundRecorder.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundSource.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Audio/SoundStream.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Config.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/BlendMode.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/CircleShape.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Color.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/ConvexShape.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Drawable.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Export.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Font.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Glsl.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Glyph.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Image.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/PrimitiveType.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Rect.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/RectangleShape.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/RenderStates.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/RenderTarget.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/RenderTexture.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/RenderWindow.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Shader.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Shape.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Sprite.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Text.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Texture.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Transform.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Transformable.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/Vertex.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/VertexArray.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Graphics/View.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Main.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/Export.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/Ftp.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/Http.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/IpAddress.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/Packet.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/Socket.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/SocketHandle.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/SocketSelector.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/TcpListener.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/TcpSocket.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Network/UdpSocket.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/OpenGL.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Clock.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Err.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Export.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/FileInputStream.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/InputStream.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Lock.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/MemoryInputStream.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Mutex.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/NativeActivity.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/NonCopyable.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Sleep.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/String.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Thread.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/ThreadLocal.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/ThreadLocalPtr.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Time.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Utf.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Vector2.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/System/Vector3.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Context.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/ContextSettings.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Event.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Export.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/GlResource.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Joystick.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Keyboard.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Mouse.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Sensor.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Touch.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/VideoMode.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/Window.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/WindowHandle.hpp" />
+		<Unit filename="SFML-2.4.2/include/SFML/Window/WindowStyle.hpp" />
+		<Unit filename="const_and_def.hpp" />
+		<Unit filename="imgui-master/imconfig.h" />
+		<Unit filename="imgui-master/imgui-sfml-master/imconfig-SFML.h" />
+		<Unit filename="imgui-master/imgui-sfml-master/imgui-SFML.cpp" />
+		<Unit filename="imgui-master/imgui-sfml-master/imgui-SFML.h" />
+		<Unit filename="imgui-master/imgui.cpp" />
+		<Unit filename="imgui-master/imgui.h" />
+		<Unit filename="imgui-master/imgui_demo.cpp" />
+		<Unit filename="imgui-master/imgui_draw.cpp" />
+		<Unit filename="imgui-master/imgui_internal.h" />
+		<Unit filename="imgui-master/stb_rect_pack.h" />
+		<Unit filename="imgui-master/stb_textedit.h" />
+		<Unit filename="imgui-master/stb_truetype.h" />
+		<Unit filename="include/B2th.h" />
+		<Unit filename="include/remote_adress.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/B2th.cpp" />
+		<Unit filename="src/remote_adress.cpp" />
+		<Unit filename="version.h" />
+		<Extensions>
+			<DoxyBlocks>
+				<comment_style block="5" line="2" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
+			</AutoVersioning>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

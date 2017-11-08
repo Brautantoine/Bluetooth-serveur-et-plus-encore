@@ -1,0 +1,5 @@
+Added	Rajout de la connection et de l'envoie Bluetooth
+Added	interface connection/deconnection et reception
+Added	création du fichiers par défaut d'adresse de la classe adresse et du vecteur de class adresse
+Added	lecture du fichier et initialisation des adresses
+Added	selectionneur d'adresse "validé"
