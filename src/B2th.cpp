@@ -6,12 +6,12 @@
 
 using std::string;
 
-B2th::B2th(char* adrr) : dest(adrr)
+/*B2th::B2th(char* adrr) : dest(adrr)
 {
     struct sockaddr_rc addr = { 0 };
     B2th::flag_Connect=0;
     current_addr=0;
-}
+}*/
 
 B2th::B2th()
 {
@@ -148,8 +148,9 @@ void B2th::create_default_txt()
     else std::cerr << "erreur lors de la création du fichier par défaut :" << std::strerror(errno);
 }
 
-void B2th::load_from_txt()
+int B2th::load_from_txt()
 {
+    int tempreturn(0);
     int tempInt;
     std::string tempString1;
     std::string tempString2;
@@ -166,7 +167,8 @@ void B2th::load_from_txt()
         }
         flux.close();
     }
-    else if(errno==ENOENT){flux.close();create_default_txt();}
+    else if(errno==ENOENT){flux.close();create_default_txt();tempreturn=-1;}
+    return tempreturn;
 }
 
 void B2th::trig_adress(int pos)

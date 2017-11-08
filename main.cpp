@@ -15,7 +15,7 @@ using std::string;
 int main()
 {
     bool flag_window_shutdown(false);
-    B2th remote_device ("00:06:66:6E:00:C6"); //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
+    B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
 
 
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "ZONE de Base");
@@ -40,8 +40,8 @@ int main()
     window.setTitle(windowTitle);
 
     sf::Clock deltaClock;
-    remote_device.create_default_txt();
-    remote_device.load_from_txt();
+   // remote_device.create_default_txt();
+    while(remote_device.load_from_txt());
     //if(!(remote_device.get_connect_status()))remote_device.connection();
     while (window.isOpen())
     {
