@@ -4,6 +4,7 @@
 #include "cerrno"
 #include "cstring"
 
+
 using std::string;
 
 /*B2th::B2th(char* adrr) : dest(adrr)
@@ -62,6 +63,8 @@ int B2th::connection()
     //puting socket in non-blocking mode
     sock_flags = fcntl(s,F_GETFL,0);
     fcntl(s,F_SETFL, sock_flags | O_NONBLOCK);
+    data_in.clear();
+    return 0;
 }
 
 bool B2th::get_connect_status()
@@ -95,6 +98,12 @@ std::string B2th::recv_from_remote()
             {
                 buff_random[stat_rec]='\0';
                 data_in.append(buff_random);
+                std::ofstream flux(LOG_FILE,std::ios::app);
+                if(!flux.fail())
+                {
+                    flux << data_in << std::endl;
+                    flux.close();
+                }
 
             }
             //else data_in="N/A\0";
@@ -109,6 +118,12 @@ std::string B2th::recv_from_remote(int lenght)
             {
                 buff_random[stat_rec]='\0';
                 data_in.append(buff_random);
+                /*std::ofstream flux("config/log",std::ios::app);
+                if(!flux.fail())
+                {
+                    flux << data_in << std::endl;
+                    flux.close();
+                }*/
 
             }
             //else data_in="N/A\0";
@@ -199,4 +214,17 @@ void B2th::ftrig_adress()
             }
         }
     }
+}
+
+void B2th::create_new_addr(std::string adresse,std::string detail)
+{
+    std::ofstream flux("config/adresse",std::ios::app);
+    if(!flux.fail())
+        {
+            flux << std::endl << rAddr.size()+1 << " " << adresse << " " << detail ;
+            flux.close();
+        }
+    else std::cerr << "erreur lors de l'ajout de l'adresse :" << std::strerror(errno);
+
+    rAddr.emplace_back(rAddr.size()+1,adresse,detail);
 }

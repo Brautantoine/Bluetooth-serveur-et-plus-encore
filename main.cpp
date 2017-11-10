@@ -3,6 +3,7 @@
 #include "const_and_def.hpp"
 #include "B2th.h"
 #include "version.h"
+#include "gestion_fichier.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
@@ -33,8 +34,12 @@ int main()
     // for instructions on using std::string with ImGui
     char windowTitle[255] = "Dev_Bluetooth";
     char rtx[255];
-    char version[]="version : ";
+    char detail[255];
+    static char adresse[18];
+    static char version[19]="version : ";
     strcat(version,AutoVersion::FULLVERSION_STRING);
+    version[18]='\0';
+
     string data_in("N/A");
 
     window.setTitle(windowTitle);
@@ -42,6 +47,7 @@ int main()
     sf::Clock deltaClock;
    // remote_device.create_default_txt();
     while(remote_device.load_from_txt());
+    stdfile::void_log_file();
     //if(!(remote_device.get_connect_status()))remote_device.connection();
     while (window.isOpen())
     {
@@ -117,7 +123,7 @@ int main()
             rtx[0]='\0';
         }
         data_in=remote_device.recv_from_remote();
-        ImGui::Text(data_in.c_str());
+        ImGui::TextUnformatted(data_in.c_str());
         if (ImGui::Button("Effacer"))
         {
             // this code gets if user clicks on the button
@@ -129,8 +135,19 @@ int main()
         if(ImGui::Button("Deconnecter"))remote_device.close_connection();
         ImGui::End();
 
+        ImGui::Begin("Ajouter adresse");
+        ImGui::InputText("adresse",adresse,18);
+        ImGui::InputText("descriptif",detail,255);
+        if (ImGui::Button("Enregistrer"))
+        {
+            remote_device.create_new_addr(adresse,detail);
+            adresse[0]='\0';
+            detail[0]='\0';
+        }
+        ImGui::End();
+
         ImGui::Begin("Shutdown");
-        ImGui::Text(version);
+        ImGui::TextUnformatted(version);
         if (ImGui::Button("Quitter"))
         {
             // this code gets if user clicks on the button

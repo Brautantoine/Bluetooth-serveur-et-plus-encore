@@ -1708,20 +1708,21 @@
 	<string.h>
 	<memory.h>
 
-1510183277 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
+1510320663 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
 	"imgui.h"
 	"imgui-master/imgui-sfml-master/imgui-SFML.h"
 	"const_and_def.hpp"
 	"B2th.h"
 	"version.h"
+	"gestion_fichier.hpp"
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/System/Clock.hpp>
 	<SFML/Window/Event.hpp>
 	<SFML/OpenGL.hpp>
 
-1510070271 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
+1510322550 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
 
-1510183885 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
+1510322735 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
 	<stdio.h>
 	<iostream>
 	<cstdio>
@@ -1735,13 +1736,14 @@
 	<vector>
 	<string>
 	"remote_adress.h"
+	"../const_and_def.hpp"
 
 1510081451 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/remote_adress.h
 	<string>
 
-1510183944 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
+1510249546 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
 
-1510183247 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
+1510322683 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
 	"B2th.h"
 	"iostream"
 	"fstream"
@@ -1750,6 +1752,15 @@
 
 1510080049 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/remote_adress.cpp
 	"remote_adress.h"
+	"iostream"
+	"fstream"
+	"cerrno"
+	"cstring"
+
+1510251471 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/gestion_fichier.hpp
+
+1510251498 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/gestion_fichier.cpp
+	"gestion_fichier.hpp"
 	"iostream"
 	"fstream"
 	"cerrno"

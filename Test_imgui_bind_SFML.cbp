@@ -169,9 +169,11 @@ copier imconfig-sfml dans imconfig
 		<Unit filename="imgui-master/stb_textedit.h" />
 		<Unit filename="imgui-master/stb_truetype.h" />
 		<Unit filename="include/B2th.h" />
+		<Unit filename="include/gestion_fichier.hpp" />
 		<Unit filename="include/remote_adress.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/B2th.cpp" />
+		<Unit filename="src/gestion_fichier.cpp" />
 		<Unit filename="src/remote_adress.cpp" />
 		<Unit filename="version.h" />
 		<Extensions>

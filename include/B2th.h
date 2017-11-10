@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include "remote_adress.h"
+#include "../const_and_def.hpp"
 
 
 class B2th
@@ -43,9 +44,10 @@ class B2th
         std::string recv_from_remote();                                                            // Ecoute les donnees entrante et les places dans le buffer
         std::string recv_from_remote(int lenght);                                                  // Surcharge pour recevoir un nombre precis de donnees
 
-        //Chargement des adresses
+        //Gestion des adresses
         void create_default_txt();                                                                 // Creer un fichier texte ../config/adresse contenant les valeurs
         int load_from_txt();                                                                       // Charge toutes les adresses presente dans ../config/adresse return 0 si reussi -1 si echec
+        void create_new_addr(std::string adresse,std::string detail);                              // Enregistre une nouvelle adresse et l'ecris dans le fichier de sauvegarde
 
         //Manipulation de l'adresse
         void trig_adress(int pos);                                                                 // Rend une adresse active
