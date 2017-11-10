@@ -3,6 +3,8 @@
 #include "fstream"
 #include "cerrno"
 #include "cstring"
+#include "Erreur.hpp"
+#include "imgui.h"
 
 
 using std::string;
@@ -146,8 +148,11 @@ void B2th::clear_data_in()
 
 void B2th::close_connection()
 {
+    if (flag_Connect)
+    {
     close(s);
     flag_Connect=false;
+    }
 }
 
 const char* B2th::get_dest()
@@ -190,7 +195,7 @@ int B2th::load_from_txt()
         }
         flux.close();
     }
-    else if(errno==ENOENT){flux.close();create_default_txt();tempreturn=-1;}
+    else if(errno==ENOENT){throw Erreur(ImGui::GetTime(),"Création d'un nouveau fichier d'adresse par défaut");}
     return tempreturn;
 }
 

@@ -4,6 +4,9 @@
 #include "B2th.h"
 #include "version.h"
 #include "gestion_fichier.hpp"
+#include "ImGui_log_struct.hpp"
+//#include "imgui-master/imgui_demo.cpp"
+#include <exception>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
@@ -15,6 +18,8 @@ using std::string;
 
 int main()
 {
+    static bool show_log_debug = true;
+
     bool flag_window_shutdown(false);
     B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
 
@@ -24,6 +29,8 @@ int main()
     ImGui::SFML::Init(window);
 
     sf::Color bgColor;
+
+    static AppLog debug_log;
 
     float color[3] = { 206.F/255.f, 206.F/255.f, 206.F/255.f };
     bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
@@ -46,7 +53,13 @@ int main()
 
     sf::Clock deltaClock;
    // remote_device.create_default_txt();
-    while(remote_device.load_from_txt());
+    try{remote_device.load_from_txt();}
+    catch (std::exception const& e)
+    {
+        remote_device.create_default_txt();
+        remote_device.load_from_txt();
+        debug_log.AddLog("%s",e.what());
+    }
     ///stdfile::void_log_file();
     //if(!(remote_device.get_connect_status()))remote_device.connection();
     while (window.isOpen())
@@ -64,6 +77,16 @@ int main()
         }
 
         ImGui::SFML::Update(window,deltaClock.restart());
+
+        if(ImGui::BeginMainMenuBar())
+        {
+            if(ImGui::BeginMenu("Window"))
+            {
+                ImGui::MenuItem("Log/Debug",NULL,&show_log_debug);
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
 
         ImGui::Begin("Parametres"); // begin window
 
@@ -179,7 +202,16 @@ int main()
             }
             ImGui::End();
         }
+        ImGui::ShowTestWindow();
 
+        try{}
+
+        catch(std::exception const& e)
+        {
+            debug_log.AddLog("[%s]",e.what());
+        }
+
+        if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 
         window.clear(bgColor); // fill background with color
         ImGui::Render();
