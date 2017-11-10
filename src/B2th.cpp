@@ -161,7 +161,7 @@ const char* B2th::get_dest()
 
 void B2th::create_default_txt()
 {
-    std::ofstream flux("config/adresse",std::ios::trunc);
+    std::ofstream flux(ADRESS_FILE,std::ios::trunc);
     if(!flux.fail())
         {
             flux << 1 << " 00:06:66:6E:00:C6" << " péripheriques bluetooth par defaut \"iut\"" << std::endl
@@ -177,7 +177,7 @@ int B2th::load_from_txt()
     int tempInt;
     std::string tempString1;
     std::string tempString2;
-    std::ifstream flux("config/adresse",std::ios::in);
+    std::ifstream flux(ADRESS_FILE,std::ios::in);
     if(!flux.fail())
     {
         bool term(flux.eof());
@@ -226,7 +226,7 @@ void B2th::ftrig_adress()
 
 void B2th::create_new_addr(std::string adresse,std::string detail)
 {
-    std::ofstream flux("config/adresse",std::ios::app);
+    std::ofstream flux(ADRESS_FILE,std::ios::app);
     if(!flux.fail())
         {
             flux << std::endl << rAddr.size()+1 << " " << adresse << " " << detail ;
