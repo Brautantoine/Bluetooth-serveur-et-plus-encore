@@ -63,7 +63,10 @@ int B2th::connection()
     //puting socket in non-blocking mode
     sock_flags = fcntl(s,F_GETFL,0);
     fcntl(s,F_SETFL, sock_flags | O_NONBLOCK);
+
     data_in.clear();
+    stdfile::void_log_file();
+
     return 0;
 }
 
@@ -93,6 +96,9 @@ void B2th::set_rtx(char* data)
 
 std::string B2th::recv_from_remote()
 {
+    if(flag_Connect)
+    {
+
 
             if(stat_rec=read(s,&buff_random,99)>0)
             {
@@ -109,6 +115,8 @@ std::string B2th::recv_from_remote()
             //else data_in="N/A\0";
 
             return data_in;
+    }
+    else return "déconnecter";
 }
 
 std::string B2th::recv_from_remote(int lenght)

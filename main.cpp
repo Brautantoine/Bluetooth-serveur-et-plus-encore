@@ -47,7 +47,7 @@ int main()
     sf::Clock deltaClock;
    // remote_device.create_default_txt();
     while(remote_device.load_from_txt());
-    stdfile::void_log_file();
+    ///stdfile::void_log_file();
     //if(!(remote_device.get_connect_status()))remote_device.connection();
     while (window.isOpen())
     {

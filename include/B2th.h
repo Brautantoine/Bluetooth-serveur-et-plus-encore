@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include "remote_adress.h"
+#include "gestion_fichier.hpp"
 #include "../const_and_def.hpp"
 
 

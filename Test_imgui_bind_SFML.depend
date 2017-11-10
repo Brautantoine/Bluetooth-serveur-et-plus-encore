@@ -1708,7 +1708,7 @@
 	<string.h>
 	<memory.h>
 
-1510320663 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
+1510330581 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
 	"imgui.h"
 	"imgui-master/imgui-sfml-master/imgui-SFML.h"
 	"const_and_def.hpp"
@@ -1722,7 +1722,7 @@
 
 1510322550 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
 
-1510322735 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
+1510330581 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
 	<stdio.h>
 	<iostream>
 	<cstdio>
@@ -1736,12 +1736,13 @@
 	<vector>
 	<string>
 	"remote_adress.h"
+	"gestion_fichier.hpp"
 	"../const_and_def.hpp"
 
 1510081451 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/remote_adress.h
 	<string>
 
-1510249546 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
+1510323345 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
 
 1510322683 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
 	"B2th.h"
@@ -1757,12 +1758,13 @@
 	"cerrno"
 	"cstring"
 
-1510251471 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/gestion_fichier.hpp
+1510330510 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/gestion_fichier.hpp
 
-1510251498 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/gestion_fichier.cpp
+1510322742 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/gestion_fichier.cpp
 	"gestion_fichier.hpp"
 	"iostream"
 	"fstream"
 	"cerrno"
 	"cstring"
+	"../const_and_def.hpp"
 
