@@ -29,8 +29,16 @@ int main()
     ImGui::SFML::Init(window);
 
     sf::Color bgColor;
+    ///sf::Image icone;
+
 
     static AppLog debug_log;
+
+
+    ///if(!icone.loadFromFile("IMG/icone.png"))exit(EXIT_FAILURE);
+
+    ///window.setIcon(32,32,icone.getPixelsPtr());
+
 
     float color[3] = { 206.F/255.f, 206.F/255.f, 206.F/255.f };
     bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
@@ -119,10 +127,7 @@ int main()
         {
             for(int i=0;i<remote_device.get_adr_number();i++)
             {
-                /*if(!(ImGui::Checkbox((remote_device.get_current_addr_detail(i)).c_str(),remote_device.get_current_flag_control(i))));
-                {
 
-                }*/
                 if(ImGui::MenuItem((remote_device.get_current_addr_detail(i)).c_str(),NULL,remote_device.get_current_flag_control(i),true))
                 {
                    remote_device.trig_adress(i);
@@ -177,31 +182,19 @@ int main()
             // yes, you could have written if(ImGui::InputText(...))
             // but I do this to show how buttons work :)
             flag_window_shutdown=true;
+            ImGui::OpenPopup("Êtes vous sûr ?");
 
+        }
+        if(ImGui::BeginPopupModal("Êtes vous sûr ?"))
+        {
+            ImGui::Text("Vous allez quitter le programme");
+            if(ImGui::Button("Oui"))window.close();
+            ImGui::SameLine();
+            if(ImGui::Button("Non"))ImGui::CloseCurrentPopup();
+            ImGui::EndPopup();
         }
         ImGui::End();
-        if(flag_window_shutdown)
-        {
-            ImGui::Begin("Etes vous sur ?");
-            if (ImGui::Button("OUI"))
-            {
-                // this code gets if user clicks on the button
-                // yes, you could have written if(ImGui::InputText(...))
-                // but I do this to show how buttons work :)
-                window.close();
 
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("NON"))
-            {
-                // this code gets if user clicks on the button
-                // yes, you could have written if(ImGui::InputText(...))
-                // but I do this to show how buttons work :)
-                flag_window_shutdown=false;
-
-            }
-            ImGui::End();
-        }
         ImGui::ShowTestWindow();
 
         try{}

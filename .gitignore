@@ -31,6 +31,9 @@
 *.out
 *.app
 
+#iniconfig
+.ini
+
 #Log and debug files
 *.ddf
 
