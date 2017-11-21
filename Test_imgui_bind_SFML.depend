@@ -1708,7 +1708,7 @@
 	<string.h>
 	<memory.h>
 
-1510675531 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
+1511269147 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
 	"imgui.h"
 	"imgui-master/imgui-sfml-master/imgui-SFML.h"
 	"const_and_def.hpp"
@@ -1716,6 +1716,7 @@
 	"version.h"
 	"gestion_fichier.hpp"
 	"ImGui_log_struct.hpp"
+	"math.h"
 	<exception>
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/System/Clock.hpp>
@@ -1744,7 +1745,7 @@
 1510081451 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/remote_adress.h
 	<string>
 
-1510346558 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
+1510733661 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
 
 1510346516 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
 	"B2th.h"

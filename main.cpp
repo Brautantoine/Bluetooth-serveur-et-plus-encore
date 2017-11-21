@@ -5,6 +5,7 @@
 #include "version.h"
 #include "gestion_fichier.hpp"
 #include "ImGui_log_struct.hpp"
+#include "math.h"
 //#include "imgui-master/imgui_demo.cpp"
 #include <exception>
 
@@ -18,26 +19,54 @@ using std::string;
 
 int main()
 {
-    static bool show_log_debug = true;
+    static bool no_titlebar = false;
+    static bool no_border = true;
+    static bool no_resize = true;
+    static bool no_move = true;
+    static bool no_scrollbar = false;
+    static bool no_collapse = false;
+    static bool no_menu = false;
 
-    bool flag_window_shutdown(false);
+    ImGuiWindowFlags window_flags = 0;
+    if (no_titlebar)  window_flags |= ImGuiWindowFlags_NoTitleBar;
+    if (!no_border)   window_flags |= ImGuiWindowFlags_ShowBorders;
+    if (no_resize)    window_flags |= ImGuiWindowFlags_NoResize;
+    if (no_move)      window_flags |= ImGuiWindowFlags_NoMove;
+    if (no_scrollbar) window_flags |= ImGuiWindowFlags_NoScrollbar;
+    if (no_collapse)  window_flags |= ImGuiWindowFlags_NoCollapse;
+    if (!no_menu)     window_flags |= ImGuiWindowFlags_MenuBar;
+
+    static bool show_log_debug (true);
+    static bool repeat_transmission(false);
+    static bool show_plot_line_window(false);
+    static bool show_B2TH_window(true);
+    /// bool flag_window_shutdown(false);
+
     B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
 
+    sf::Clock repeatT_clock;
+
+    float treshold_repeatT(0.5);
+    std::vector<float> baricentre;
+    for(int i=0; i<128; i++)
+    {
+        baricentre.emplace_back(sin(i));
+    }
 
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "ZONE de Base");
     window.setVerticalSyncEnabled(true);
     ImGui::SFML::Init(window);
 
     sf::Color bgColor;
-    ///sf::Image icone;
+    sf::Image icone;
 
 
     static AppLog debug_log;
 
 
-    ///if(!icone.loadFromFile("IMG/icone.png"))exit(EXIT_FAILURE);
+    if(!icone.loadFromFile("IMG/icone.png"))exit(EXIT_FAILURE);
 
-    ///window.setIcon(32,32,icone.getPixelsPtr());
+    window.setIcon(32,32,icone.getPixelsPtr());
 
 
     float color[3] = { 206.F/255.f, 206.F/255.f, 206.F/255.f };
@@ -60,8 +89,12 @@ int main()
     window.setTitle(windowTitle);
 
     sf::Clock deltaClock;
-   // remote_device.create_default_txt();
-    try{remote_device.load_from_txt();}
+
+    // remote_device.create_default_txt();
+    try
+    {
+        remote_device.load_from_txt();
+    }
     catch (std::exception const& e)
     {
         remote_device.create_default_txt();
@@ -90,7 +123,7 @@ int main()
         {
             if(ImGui::BeginMenu("Window"))
             {
-                ImGui::MenuItem("Log/Debug",NULL,&show_log_debug);
+                ImGui::MenuItem("Log/Debug","Beta",&show_log_debug);
                 ImGui::EndMenu();
             }
             ImGui::EndMainMenuBar();
@@ -122,18 +155,54 @@ int main()
         ImGui::End(); // end window
 
 
-        ImGui::Begin("Bluetooth");
-        if( ImGui::BeginMenu("Adresse",!(remote_device.get_connect_status())))
+        ImGui::Begin("Bluetooth",&show_B2TH_window,window_flags);
+        if(ImGui::BeginMenuBar())
         {
-            for(int i=0;i<remote_device.get_adr_number();i++)
+            if(ImGui::BeginMenu("Window"))
             {
-
-                if(ImGui::MenuItem((remote_device.get_current_addr_detail(i)).c_str(),NULL,remote_device.get_current_flag_control(i),true))
-                {
-                   remote_device.trig_adress(i);
-                }
+                ImGui::MenuItem("Baricentre",NULL,&show_plot_line_window);
+                ImGui::EndMenu();
             }
-            ImGui::EndMenu();
+            ///ImGui::EndMenuBar();}
+            if( ImGui::BeginMenu("Adresse",!(remote_device.get_connect_status())))
+            {
+                for(int i=0; i<remote_device.get_adr_number(); i++)
+                {
+
+                    if(ImGui::MenuItem((remote_device.get_current_addr_detail(i)).c_str(),NULL,remote_device.get_current_flag_control(i),true))
+                    {
+                        remote_device.trig_adress(i);
+                    }
+                }
+                /**if(ImGui::MenuItem("Ajouter une adresse"))
+                {
+                    ImGui::OpenPopup("Nouvelle adresse");
+
+                }
+                if(ImGui::BeginPopupModal("Nouvelle adresse"))
+                    {
+                        ImGui::InputText("adresse",adresse,18);
+                        ImGui::InputText("descriptif",detail,255);
+                        if(ImGui::Button("Enregistrer"))
+                        {
+                            remote_device.create_new_addr(adresse,detail);
+                            adresse[0]='\0';
+                            detail[0]='\0';
+                            ImGui::CloseCurrentPopup();
+                        }
+                        ImGui::SameLine();
+                        if(ImGui::Button("Annuler"))
+                        {
+                            adresse[0]='\0';
+                            detail[0]='\0';
+                            ImGui::CloseCurrentPopup();
+                        }
+                        ImGui::EndPopup();
+                    }//*/
+                ImGui::EndMenu();
+
+            }
+            ImGui::EndMenuBar();
         }
         ImGui::MenuItem("conection status",remote_device.get_dest(),remote_device.get_connect_status(),false);
         if(ImGui::Button("Connexion"))
@@ -150,6 +219,14 @@ int main()
             remote_device.send_to_remote();
             rtx[0]='\0';
         }
+        ImGui::SliderFloat("secondes",&treshold_repeatT,0.5,5,"%.1f");
+        ImGui::SameLine();
+        ImGui::Checkbox("Repeter",&repeat_transmission);
+        if(repeat_transmission&&repeatT_clock.getElapsedTime().asSeconds()>treshold_repeatT)
+        {
+            remote_device.send_to_remote();
+            repeatT_clock.restart();
+        }
         data_in=remote_device.recv_from_remote();
         ImGui::TextUnformatted(data_in.c_str());
         if (ImGui::Button("Effacer"))
@@ -161,7 +238,33 @@ int main()
 
         }
         if(ImGui::Button("Deconnecter"))remote_device.close_connection();
+        if(ImGui::Button("Ajouter une adresse"))
+                {
+                    ImGui::OpenPopup("Nouvelle adresse");
+
+                }
+                if(ImGui::BeginPopupModal("Nouvelle adresse"))
+                    {
+                        ImGui::InputText("adresse",adresse,18);
+                        ImGui::InputText("descriptif",detail,255);
+                        if(ImGui::Button("Enregistrer"))
+                        {
+                            remote_device.create_new_addr(adresse,detail);
+                            adresse[0]='\0';
+                            detail[0]='\0';
+                            ImGui::CloseCurrentPopup();
+                        }
+                        ImGui::SameLine();
+                        if(ImGui::Button("Annuler"))
+                        {
+                            adresse[0]='\0';
+                            detail[0]='\0';
+                            ImGui::CloseCurrentPopup();
+                        }
+                        ImGui::EndPopup();
+                    }
         ImGui::End();
+
 
         ImGui::Begin("Ajouter adresse");
         ImGui::InputText("adresse",adresse,18);
@@ -181,7 +284,6 @@ int main()
             // this code gets if user clicks on the button
             // yes, you could have written if(ImGui::InputText(...))
             // but I do this to show how buttons work :)
-            flag_window_shutdown=true;
             ImGui::OpenPopup("Êtes vous sûr ?");
 
         }
@@ -195,14 +297,16 @@ int main()
         }
         ImGui::End();
 
+        if(show_plot_line_window)
+        {
+            ImGui::Begin("Baricentre",&show_plot_line_window);
+            ImGui::PlotLines("Baricentre",baricentre.data(),baricentre.size());
+            ImGui::End();
+        }
+
         ImGui::ShowTestWindow();
 
-        try{}
 
-        catch(std::exception const& e)
-        {
-            debug_log.AddLog("[%s]",e.what());
-        }
 
         if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 
