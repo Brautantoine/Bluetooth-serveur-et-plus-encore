@@ -36,10 +36,11 @@ int main()
     if (no_collapse)  window_flags |= ImGuiWindowFlags_NoCollapse;
     if (!no_menu)     window_flags |= ImGuiWindowFlags_MenuBar;
 
-    static bool show_log_debug (true);
+    static bool show_log_debug (false);
     static bool repeat_transmission(false);
     static bool show_plot_line_window(false);
     static bool show_B2TH_window(true);
+    static bool show_popup_ad(false);
     /// bool flag_window_shutdown(false);
 
     B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
@@ -172,9 +173,18 @@ int main()
                     if(ImGui::MenuItem((remote_device.get_current_addr_detail(i)).c_str(),NULL,remote_device.get_current_flag_control(i),true))
                     {
                         remote_device.trig_adress(i);
-                    }
+                    } ///     ///
                 }
-                /**if(ImGui::MenuItem("Ajouter une adresse"))
+                ImGui::Separator();
+                    if(ImGui::MenuItem("Ajouter une adresse"))
+                    {
+                       show_popup_ad=true;
+                    }
+                ImGui::EndMenu();
+
+            }
+            ImGui::EndMenuBar();/// ///
+             if(show_popup_ad)
                 {
                     ImGui::OpenPopup("Nouvelle adresse");
 
@@ -189,6 +199,7 @@ int main()
                             adresse[0]='\0';
                             detail[0]='\0';
                             ImGui::CloseCurrentPopup();
+                            show_popup_ad=false;
                         }
                         ImGui::SameLine();
                         if(ImGui::Button("Annuler"))
@@ -196,13 +207,10 @@ int main()
                             adresse[0]='\0';
                             detail[0]='\0';
                             ImGui::CloseCurrentPopup();
+                            show_popup_ad=false;
                         }
                         ImGui::EndPopup();
-                    }//*/
-                ImGui::EndMenu();
-
-            }
-            ImGui::EndMenuBar();
+                    }
         }
         ImGui::MenuItem("conection status",remote_device.get_dest(),remote_device.get_connect_status(),false);
         if(ImGui::Button("Connexion"))
@@ -222,7 +230,7 @@ int main()
         ImGui::SliderFloat("secondes",&treshold_repeatT,0.5,5,"%.1f");
         ImGui::SameLine();
         ImGui::Checkbox("Repeter",&repeat_transmission);
-        if(repeat_transmission&&repeatT_clock.getElapsedTime().asSeconds()>treshold_repeatT)
+        if(repeat_transmission&&repeatT_clock.getElapsedTime().asSeconds()>treshold_repeatT&&remote_device.get_connect_status())
         {
             remote_device.send_to_remote();
             repeatT_clock.restart();
@@ -238,31 +246,6 @@ int main()
 
         }
         if(ImGui::Button("Deconnecter"))remote_device.close_connection();
-        if(ImGui::Button("Ajouter une adresse"))
-                {
-                    ImGui::OpenPopup("Nouvelle adresse");
-
-                }
-                if(ImGui::BeginPopupModal("Nouvelle adresse"))
-                    {
-                        ImGui::InputText("adresse",adresse,18);
-                        ImGui::InputText("descriptif",detail,255);
-                        if(ImGui::Button("Enregistrer"))
-                        {
-                            remote_device.create_new_addr(adresse,detail);
-                            adresse[0]='\0';
-                            detail[0]='\0';
-                            ImGui::CloseCurrentPopup();
-                        }
-                        ImGui::SameLine();
-                        if(ImGui::Button("Annuler"))
-                        {
-                            adresse[0]='\0';
-                            detail[0]='\0';
-                            ImGui::CloseCurrentPopup();
-                        }
-                        ImGui::EndPopup();
-                    }
         ImGui::End();
 
 

@@ -239,5 +239,5 @@ void B2th::create_new_addr(std::string adresse,std::string detail)
         }
     else std::cerr << "erreur lors de l'ajout de l'adresse :" << std::strerror(errno);
 
-    rAddr.emplace_back(rAddr.size()+1,adresse,detail);
+    rAddr.emplace_back(rAddr.size()+1,adresse," "+detail);
 }
