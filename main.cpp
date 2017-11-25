@@ -6,6 +6,7 @@
 #include "gestion_fichier.hpp"
 #include "ImGui_log_struct.hpp"
 #include "math.h"
+#include "Erreur.hpp"
 //#include "imgui-master/imgui_demo.cpp"
 #include <exception>
 
@@ -96,11 +97,20 @@ int main()
     {
         remote_device.load_from_txt();
     }
-    catch (std::exception const& e)
+    catch (Erreur const& e)
     {
-        remote_device.create_default_txt();
-        remote_device.load_from_txt();
-        debug_log.AddLog("%s",e.what());
+        if(e.getNumero()==FICHIER_ABSENT)
+        {
+            remote_device.create_default_txt();
+            remote_device.load_from_txt();
+            debug_log.AddLog("At:%2f: %s  [%d]",e.when(),e.what(),e.getNumero());
+        }
+        else if (e.getNumero()==MAC_INVALIDE)
+        {
+            remote_device.create_default_txt();
+            remote_device.load_from_txt();
+            debug_log.AddLog("At:%2f: %s  [%d]",e.when(),e.what(),e.getNumero());
+        }
     }
     ///stdfile::void_log_file();
     //if(!(remote_device.get_connect_status()))remote_device.connection();
@@ -176,41 +186,41 @@ int main()
                     } ///     ///
                 }
                 ImGui::Separator();
-                    if(ImGui::MenuItem("Ajouter une adresse"))
-                    {
-                       show_popup_ad=true;
-                    }
+                if(ImGui::MenuItem("Ajouter une adresse"))
+                {
+                    show_popup_ad=true;
+                }
                 ImGui::EndMenu();
 
             }
             ImGui::EndMenuBar();/// ///
-             if(show_popup_ad)
-                {
-                    ImGui::OpenPopup("Nouvelle adresse");
+            if(show_popup_ad)
+            {
+                ImGui::OpenPopup("Nouvelle adresse");
 
+            }
+            if(ImGui::BeginPopupModal("Nouvelle adresse"))
+            {
+                ImGui::InputText("adresse",adresse,18);
+                ImGui::InputText("descriptif",detail,255);
+                if(ImGui::Button("Enregistrer"))
+                {
+                    remote_device.create_new_addr(adresse,detail);
+                    adresse[0]='\0';
+                    detail[0]='\0';
+                    ImGui::CloseCurrentPopup();
+                    show_popup_ad=false;
                 }
-                if(ImGui::BeginPopupModal("Nouvelle adresse"))
-                    {
-                        ImGui::InputText("adresse",adresse,18);
-                        ImGui::InputText("descriptif",detail,255);
-                        if(ImGui::Button("Enregistrer"))
-                        {
-                            remote_device.create_new_addr(adresse,detail);
-                            adresse[0]='\0';
-                            detail[0]='\0';
-                            ImGui::CloseCurrentPopup();
-                            show_popup_ad=false;
-                        }
-                        ImGui::SameLine();
-                        if(ImGui::Button("Annuler"))
-                        {
-                            adresse[0]='\0';
-                            detail[0]='\0';
-                            ImGui::CloseCurrentPopup();
-                            show_popup_ad=false;
-                        }
-                        ImGui::EndPopup();
-                    }
+                ImGui::SameLine();
+                if(ImGui::Button("Annuler"))
+                {
+                    adresse[0]='\0';
+                    detail[0]='\0';
+                    ImGui::CloseCurrentPopup();
+                    show_popup_ad=false;
+                }
+                ImGui::EndPopup();
+            }
         }
         ImGui::MenuItem("conection status",remote_device.get_dest(),remote_device.get_connect_status(),false);
         if(ImGui::Button("Connexion"))

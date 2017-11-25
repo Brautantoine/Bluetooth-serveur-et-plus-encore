@@ -3,6 +3,8 @@
 
 #define LOG_FILE "config/log.ddf"
 #define ADRESS_FILE "config/adress.rep"
+#define FICHIER_ABSENT 404
+#define MAC_INVALIDE 17
 
 namespace personnal_type
 {

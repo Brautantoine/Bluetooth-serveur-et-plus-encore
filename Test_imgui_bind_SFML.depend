@@ -1708,7 +1708,7 @@
 	<string.h>
 	<memory.h>
 
-1511536382 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
+1511620703 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
 	"imgui.h"
 	"imgui-master/imgui-sfml-master/imgui-SFML.h"
 	"const_and_def.hpp"
@@ -1717,13 +1717,14 @@
 	"gestion_fichier.hpp"
 	"ImGui_log_struct.hpp"
 	"math.h"
+	"Erreur.hpp"
 	<exception>
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/System/Clock.hpp>
 	<SFML/Window/Event.hpp>
 	<SFML/OpenGL.hpp>
 
-1510331910 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
+1511620554 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
 
 1511535648 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
 	<stdio.h>
@@ -1747,7 +1748,7 @@
 
 1511357264 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
 
-1511536366 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
+1511621021 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
 	"B2th.h"
 	"iostream"
 	"fstream"
@@ -1774,8 +1775,8 @@
 	"cstring"
 	"../const_and_def.hpp"
 
-1510346664 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/ImGui_log_struct.hpp
+1511620871 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/ImGui_log_struct.hpp
 
-1510345656 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/Erreur.hpp
+1511620554 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/Erreur.hpp
 	<exception>
 

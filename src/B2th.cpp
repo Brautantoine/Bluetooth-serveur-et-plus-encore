@@ -179,6 +179,7 @@ void B2th::create_default_txt()
 
 int B2th::load_from_txt()
 {
+    float load_start_at(ImGui::GetTime());
     int tempreturn(0);
     int tempInt;
     std::string tempString1;
@@ -190,13 +191,14 @@ int B2th::load_from_txt()
         while(!term)
         {
             flux >> tempInt >> tempString1;
+            if(tempString1.size()!=17)throw Erreur(ImGui::GetTime(),MAC_INVALIDE,"Fichier invalide (Adresse  MAC erroné)\nCréation d'un nouveau fichier d'adresse par défaut");
             getline(flux,tempString2);
             rAddr.emplace_back(tempInt,tempString1.data(),tempString2.data());
             term=flux.eof();
         }
         flux.close();
     }
-    else if(errno==ENOENT){throw Erreur(ImGui::GetTime(),"Création d'un nouveau fichier d'adresse par défaut");}
+    else if(errno==ENOENT)throw Erreur(ImGui::GetTime(),FICHIER_ABSENT,"Fichier introuvable\nCréation d'un nouveau fichier d'adresse par défaut");
     return tempreturn;
 }
 

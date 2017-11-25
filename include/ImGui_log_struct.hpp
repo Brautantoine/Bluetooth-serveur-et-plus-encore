@@ -53,7 +53,6 @@ struct AppLog
         {
             ImGui::TextUnformatted(Buf.begin());
         }
-
         if (ScrollToBottom)
             ImGui::SetScrollHere(1.0f);
         ScrollToBottom = false;

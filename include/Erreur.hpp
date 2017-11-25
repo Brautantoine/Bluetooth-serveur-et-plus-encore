@@ -13,9 +13,9 @@ class Erreur: public exception
 
 public:
 
-    Erreur(float numero=0, string const& phrase="", int niveau=0) throw()
+    Erreur(float temps, int numero, string const& phrase="", int niveau=0) throw()
 
-         :m_numero(numero),m_phrase(phrase),m_niveau(niveau)
+         :m_temps(temps),m_numero(numero),m_phrase(phrase),m_niveau(niveau)
 
     {}
 
@@ -24,8 +24,8 @@ public:
      virtual const char* what() const throw()
 
      {
-         std::string buff = std::to_string(m_numero)+ " : " +m_phrase;
-         return buff.c_str();
+
+         return m_phrase.c_str();
 
      }
 
@@ -39,12 +39,17 @@ public:
 
      }
 
-     float getNumero() const throw()
+     int getNumero() const throw()
 
      {
 
          return m_numero;
 
+     }
+
+     float when() const throw()
+     {
+        return m_temps;
      }
 
 
@@ -57,11 +62,13 @@ public:
 
 private:
 
-    float m_numero;               //heure de l'erreur
+    float m_numero;               //ticket de l'erreur
 
     string m_phrase;            //Description de l'erreur
 
     int m_niveau;               //Niveau de l'erreur
+
+    float m_temps;              //temps de l'erreur
 
 };
 
