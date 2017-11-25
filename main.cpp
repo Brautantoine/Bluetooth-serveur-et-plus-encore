@@ -51,7 +51,7 @@ int main()
     std::vector<float> baricentre;
     for(int i=0; i<128; i++)
     {
-        baricentre.emplace_back(sin(i));
+        baricentre.emplace_back(sin((float)i/10));
     }
 
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "ZONE de Base");
@@ -218,7 +218,7 @@ int main()
             if(!(remote_device.get_connect_status()))remote_device.connection();
         }
         ImGui::InputText("Texte à envoyer", rtx, 255);
-        if (ImGui::Button("Envoyer"))
+        if (ImGui::Button("Envoyer")&&remote_device.get_connect_status())
         {
             // this code gets if user clicks on the button
             // yes, you could have written if(ImGui::InputText(...))
@@ -246,6 +246,7 @@ int main()
 
         }
         if(ImGui::Button("Deconnecter"))remote_device.close_connection();
+        ImGui::Value("TEMPS",ImGui::GetTime());
         ImGui::End();
 
 
@@ -283,7 +284,7 @@ int main()
         if(show_plot_line_window)
         {
             ImGui::Begin("Baricentre",&show_plot_line_window);
-            ImGui::PlotLines("Baricentre",baricentre.data(),baricentre.size());
+            ImGui::PlotLines("Baricentre",baricentre.data(),baricentre.size(),0,NULL,FLT_MAX,FLT_MAX,ImVec2(0,126));
             ImGui::End();
         }
 
@@ -291,7 +292,7 @@ int main()
 
 
 
-        if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
+        if(!show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 
         window.clear(bgColor); // fill background with color
         ImGui::Render();

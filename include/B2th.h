@@ -57,15 +57,15 @@ class B2th
     protected:
     private:
 
-        struct sockaddr_rc addr;
-
-        int s, status,stat_rec, sock_flags;
-        int current_addr;
-
         char* dest;
         std::string rtx;
         std::string data_in;
         char buff_random[100];
+
+        struct sockaddr_rc addr;
+
+        int s, status,stat_rec, sock_flags;
+        int current_addr;
 
         bool flag_Connect;
 

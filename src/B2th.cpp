@@ -3,6 +3,7 @@
 #include "fstream"
 #include "cerrno"
 #include "cstring"
+#include "ctime"
 #include "Erreur.hpp"
 #include "imgui.h"
 
