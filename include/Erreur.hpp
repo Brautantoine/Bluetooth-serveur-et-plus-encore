@@ -62,7 +62,7 @@ public:
 
 private:
 
-    float m_numero;               //ticket de l'erreur
+    int m_numero;               //ticket de l'erreur
 
     string m_phrase;            //Description de l'erreur
 

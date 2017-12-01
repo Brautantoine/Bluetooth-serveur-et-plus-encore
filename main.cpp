@@ -20,6 +20,7 @@ using std::string;
 
 int main()
 {
+
     static bool no_titlebar = false;
     static bool no_border = true;
     static bool no_resize = true;
@@ -166,7 +167,7 @@ int main()
         ImGui::End(); // end window
 
 
-        ImGui::Begin("Bluetooth",&show_B2TH_window,window_flags);
+        ImGui::Begin("Bluetooth",NULL,window_flags);
         if(ImGui::BeginMenuBar())
         {
             if(ImGui::BeginMenu("Window"))
@@ -260,16 +261,6 @@ int main()
         ImGui::End();
 
 
-        ImGui::Begin("Ajouter adresse");
-        ImGui::InputText("adresse",adresse,18);
-        ImGui::InputText("descriptif",detail,255);
-        if (ImGui::Button("Enregistrer"))
-        {
-            remote_device.create_new_addr(adresse,detail);
-            adresse[0]='\0';
-            detail[0]='\0';
-        }
-        ImGui::End();
 
         ImGui::Begin("Shutdown");
         ImGui::TextUnformatted(version);
@@ -302,7 +293,7 @@ int main()
 
 
 
-        if(!show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
+        if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 
         window.clear(bgColor); // fill background with color
         ImGui::Render();

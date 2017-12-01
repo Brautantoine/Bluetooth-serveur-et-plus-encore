@@ -10,14 +10,9 @@
 
 using std::string;
 
-/*B2th::B2th(char* adrr) : dest(adrr)
-{
-    struct sockaddr_rc addr = { 0 };
-    B2th::flag_Connect=0;
-    current_addr=0;
-}*/
 
-B2th::B2th()
+
+B2th::B2th() //constructeur par defualt
 {
     struct sockaddr_rc addr = { 0 };
     B2th::flag_Connect=0;
@@ -29,6 +24,10 @@ B2th::~B2th()
     //dtor
 }
 
+
+/**    Fonctions            **/
+/**    Connecte le socket   **/
+/**                         **/
 int B2th::connection()
 {
     while(!(*(rAddr[current_addr].Getflag_use())))
@@ -40,19 +39,19 @@ int B2th::connection()
     // allocate a socket
     std::cout << "Allocate socket :";//printf("Allocate socket :");//
     s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-    printf(" Ready\n");//std:cout << " Ready" << std::endl;
+    //printf(" Ready\n");//std:cout << " Ready" << std::endl;
 
     // set the connection parameters (who to connect to)
-    printf("Set connection parameters :");//std::cout << "Set connection parameters :";
+    //printf("Set connection parameters :");//std::cout << "Set connection parameters :";
     addr.rc_family = AF_BLUETOOTH;
     addr.rc_channel = (uint8_t) 1;
     str2ba(rAddr[current_addr].Getremote_adr(), &addr.rc_bdaddr );  //str2ba( dest, &addr.rc_bdaddr );
-    printf(" Ready\n");//std::cout << " Ready";
+    //printf(" Ready\n");//std::cout << " Ready";
 
 
 
     // connect to server
-    printf("Connect to device ...");//std::cout << "Connect to device ...";
+    //printf("Connect to device ...");//std::cout << "Connect to device ...";
     status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
 
     if( status == 0 )
