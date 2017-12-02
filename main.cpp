@@ -7,6 +7,7 @@
 #include "ImGui_log_struct.hpp"
 #include "math.h"
 #include "Erreur.hpp"
+#include "API.hpp"
 //#include "imgui-master/imgui_demo.cpp"
 #include <exception>
 
@@ -94,7 +95,7 @@ int main()
     sf::Clock deltaClock;
 
     // remote_device.create_default_txt();
-    try
+    /*try
     {
         remote_device.load_from_txt();
     }
@@ -112,7 +113,8 @@ int main()
             remote_device.load_from_txt();
             debug_log.AddLog("At:%2f: %s  [%d]",e.when(),e.what(),e.getNumero());
         }
-    }
+    }*/
+    API::load_rep(remote_device,debug_log);
     ///stdfile::void_log_file();
     //if(!(remote_device.get_connect_status()))remote_device.connection();
     while (window.isOpen())
@@ -131,7 +133,7 @@ int main()
 
         ImGui::SFML::Update(window,deltaClock.restart());
 
-        if(ImGui::BeginMainMenuBar())
+        /**if(ImGui::BeginMainMenuBar())
         {
             if(ImGui::BeginMenu("Window"))
             {
@@ -139,9 +141,10 @@ int main()
                 ImGui::EndMenu();
             }
             ImGui::EndMainMenuBar();
-        }
+        }**/
+        API::Barre_principale(&show_log_debug);
 
-        ImGui::Begin("Parametres"); // begin window
+        /**ImGui::Begin("Parametres"); // begin window
 
         // Background color edit
         if (ImGui::ColorEdit3("Background color", color))
@@ -164,7 +167,8 @@ int main()
             // but I do this to show how buttons work :)
             window.setTitle(windowTitle);
         }
-        ImGui::End(); // end window
+        ImGui::End(); // end window**/
+        if(API::parametre(bgColor,color,windowTitle))window.setTitle(windowTitle);
 
 
         ImGui::Begin("Bluetooth",NULL,window_flags);
