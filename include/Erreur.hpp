@@ -1,6 +1,7 @@
 #ifndef ERREUR_HPP_INCLUDED
 #define ERREUR_HPP_INCLUDED
 
+
 #include <exception>
 
 using namespace std;

@@ -44,7 +44,7 @@ int main()
     static bool show_plot_line_window(false);
     static bool show_B2TH_window(true);
     static bool show_popup_ad(false);
-    /// bool flag_window_shutdown(false);
+    static bool show_led_command(false);
 
     B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
 
@@ -78,8 +78,7 @@ int main()
     bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
     bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
 
-    // let's use char array as buffer, see next part
-    // for instructions on using std::string with ImGui
+
     char windowTitle[255] = "Dev_Bluetooth";
     char rtx[255];
     char detail[255];
@@ -94,29 +93,9 @@ int main()
 
     sf::Clock deltaClock;
 
-    // remote_device.create_default_txt();
-    /*try
-    {
-        remote_device.load_from_txt();
-    }
-    catch (Erreur const& e)
-    {
-        if(e.getNumero()==FICHIER_ABSENT)
-        {
-            remote_device.create_default_txt();
-            remote_device.load_from_txt();
-            debug_log.AddLog("At:%2f: %s  [%d]",e.when(),e.what(),e.getNumero());
-        }
-        else if (e.getNumero()==MAC_INVALIDE)
-        {
-            remote_device.create_default_txt();
-            remote_device.load_from_txt();
-            debug_log.AddLog("At:%2f: %s  [%d]",e.when(),e.what(),e.getNumero());
-        }
-    }*/
+
     API::load_rep(remote_device,debug_log);
-    ///stdfile::void_log_file();
-    //if(!(remote_device.get_connect_status()))remote_device.connection();
+
     while (window.isOpen())
     {
 
@@ -133,41 +112,9 @@ int main()
 
         ImGui::SFML::Update(window,deltaClock.restart());
 
-        /**if(ImGui::BeginMainMenuBar())
-        {
-            if(ImGui::BeginMenu("Window"))
-            {
-                ImGui::MenuItem("Log/Debug","Beta",&show_log_debug);
-                ImGui::EndMenu();
-            }
-            ImGui::EndMainMenuBar();
-        }**/
+
         API::Barre_principale(&show_log_debug);
 
-        /**ImGui::Begin("Parametres"); // begin window
-
-        // Background color edit
-        if (ImGui::ColorEdit3("Background color", color))
-        {
-            // this code gets called if color value changes, so
-            // the background color is upgraded automatically!
-            bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
-            bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
-            bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
-        }
-
-        // Window title text edit
-        ImGui::InputText("Window title", windowTitle, 255);
-
-
-        if (ImGui::Button("Update window title"))
-        {
-            // this code gets if user clicks on the button
-            // yes, you could have written if(ImGui::InputText(...))
-            // but I do this to show how buttons work :)
-            window.setTitle(windowTitle);
-        }
-        ImGui::End(); // end window**/
         if(API::parametre(bgColor,color,windowTitle))window.setTitle(windowTitle);
 
 
@@ -177,6 +124,7 @@ int main()
             if(ImGui::BeginMenu("Window"))
             {
                 ImGui::MenuItem("Baricentre",NULL,&show_plot_line_window);
+                ImGui::MenuItem("Commande Led",NULL,&show_led_command);
                 ImGui::EndMenu();
             }
             ///ImGui::EndMenuBar();}
@@ -251,7 +199,7 @@ int main()
             repeatT_clock.restart();
         }
         data_in=remote_device.recv_from_remote();
-        ImGui::TextUnformatted(data_in.c_str());
+        ImGui::Text("raw : %s",data_in.c_str());
         if (ImGui::Button("Effacer"))
         {
             // this code gets if user clicks on the button
@@ -295,7 +243,7 @@ int main()
 
         ImGui::ShowTestWindow();
 
-
+        if(show_led_command)API::commande_led_window(remote_device,show_led_command);
 
         if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 

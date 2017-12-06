@@ -39,6 +39,7 @@ class B2th
         //Manipulation Bluetooth
         int connection();                                                                          // Connection vers l'adresse active (adresse 0 si aucune adresse active) et passage du socket en non bloquant /!\ AUCUN RETURN
         void send_to_remote();                                                                     // Envoie des donnees contenue dans rtx vers le peripherique bluetooth
+        void send_to_remote(char msg);                                                                     // Envoie des donnees contenue dans rtx vers le peripherique bluetooth
         void set_rtx(char* data);                                                                  // Modification des donnees de rtx
         void clear_data_in();                                                                      // Efface le buffer de reception
         void close_connection();                                                                   // Ferme la connection

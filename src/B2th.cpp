@@ -14,7 +14,7 @@ using std::string;
 
 B2th::B2th() //constructeur par defualt
 {
-    struct sockaddr_rc addr = { 0 };
+    //struct sockaddr_rc addr = { 0 };
     B2th::flag_Connect=0;
     current_addr=0;
 }
@@ -91,6 +91,20 @@ void B2th::send_to_remote()
         }
 }
 
+void B2th::send_to_remote(char msg)
+{
+    if(rtx!="/EOT"&&rtx!="/RCV")
+        {
+            status = write(s, &msg, 1);
+            if(status<0) perror("Echec :");
+        }
+        else if(rtx=="/EOT")
+        {
+            status = write(s, "EOT", rtx.length());
+            if(status<0) perror("Echec :");
+        }
+}
+
 void B2th::set_rtx(char* data)
 {
     rtx=data;
@@ -109,7 +123,7 @@ std::string B2th::recv_from_remote()
                 std::ofstream flux(LOG_FILE,std::ios::app);
                 if(!flux.fail())
                 {
-                    flux << data_in << std::endl;
+                    flux << buff_random;// << std::endl;
                     flux.close();
                 }
 
@@ -121,7 +135,7 @@ std::string B2th::recv_from_remote()
     else return "déconnecter";
 }
 
-std::string B2th::recv_from_remote(int lenght)
+std::string B2th::recv_from_remote(int lenght) // OOD
 {
 
             if(stat_rec=read(s,&buff_random,lenght)>0)

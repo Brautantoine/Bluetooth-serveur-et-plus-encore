@@ -38,6 +38,7 @@ void API::Barre_principale(bool* P_show_log_debug)
             ImGui::EndMainMenuBar();
         }
 }
+
 bool API::parametre(sf::Color& bgColor,float color[3],char windowTitle[255])
 {
     bool buff = false;
@@ -67,4 +68,16 @@ bool API::parametre(sf::Color& bgColor,float color[3],char windowTitle[255])
         }
         ImGui::End(); // end window
         return buff;
+}
+
+void API::commande_led_window(B2th& remote_device,bool& show_window)
+{
+    ImGui::Begin("Commande Led",&show_window);
+    if(ImGui::Button("Allumez en rouge"))remote_device.send_to_remote('a');
+    ImGui::SameLine();
+    if(ImGui::Button("Allumez en vert"))remote_device.send_to_remote('b');
+    if(ImGui::Button("Allumez en bleu"))remote_device.send_to_remote('c');
+    ImGui::SameLine();
+    if(ImGui::Button("Eteindre"))remote_device.send_to_remote('d');
+    ImGui::End();
 }
