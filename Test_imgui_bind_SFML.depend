@@ -1708,7 +1708,7 @@
 	<string.h>
 	<memory.h>
 
-1512557624 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
+1520522991 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/main.cpp
 	"imgui.h"
 	"imgui-master/imgui-sfml-master/imgui-SFML.h"
 	"const_and_def.hpp"
@@ -1719,15 +1719,17 @@
 	"math.h"
 	"Erreur.hpp"
 	"API.hpp"
+	"robot_data.h"
 	<exception>
+	<thread>
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/System/Clock.hpp>
 	<SFML/Window/Event.hpp>
 	<SFML/OpenGL.hpp>
 
-1511620554 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
+1518526128 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/const_and_def.hpp
 
-1512557513 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
+1520522991 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/B2th.h
 	<stdio.h>
 	<iostream>
 	<cstdio>
@@ -1739,17 +1741,21 @@
 	<bluetooth/bluetooth.h>
 	<bluetooth/rfcomm.h>
 	<vector>
+	<queue>
 	<string>
+	<imgui.h>
 	"remote_adress.h"
 	"gestion_fichier.hpp"
 	"../const_and_def.hpp"
+	"thread"
+	"robot_data.h"
 
 1510081451 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/remote_adress.h
 	<string>
 
-1511357264 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
+1520522699 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/version.h
 
-1512557552 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
+1520522991 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/B2th.cpp
 	"B2th.h"
 	"iostream"
 	"fstream"
@@ -1781,11 +1787,13 @@
 1512233834 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/Erreur.hpp
 	<exception>
 
-1512557773 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/API.cpp
+1518599659 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/API.cpp
 	"API.hpp"
+	"cstring"
 
-1512557513 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/API.hpp
+1518527015 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/API.hpp
 	"B2th.h"
+	"robot_data.h"
 	"Erreur.hpp"
 	"imgui.h"
 	"ImGui_log_struct.hpp"
@@ -1990,4 +1998,12 @@
 	<SFML/System/String.hpp>
 	<string>
 	<vector>
+
+1518599649 /home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/include/robot_data.h
+	<string>
+	"queue"
+	"B2th.h"
+
+1518599666 source:/home/antoine/Bureau/NXP_cup/Bluetooth_serv_and_more/src/robot_data.cpp
+	"robot_data.h"
 

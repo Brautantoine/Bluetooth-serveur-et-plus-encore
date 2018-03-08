@@ -5,6 +5,7 @@
 #define ADRESS_FILE "config/adress.rep"
 #define FICHIER_ABSENT 404
 #define MAC_INVALIDE 17
+#define ERR_ENVOIE 189
 
 namespace personnal_type
 {

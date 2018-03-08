@@ -8,8 +8,10 @@
 #include "math.h"
 #include "Erreur.hpp"
 #include "API.hpp"
+#include "robot_data.h"
 //#include "imgui-master/imgui_demo.cpp"
 #include <exception>
+#include <thread>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
@@ -45,8 +47,11 @@ int main()
     static bool show_B2TH_window(true);
     static bool show_popup_ad(false);
     static bool show_led_command(false);
+    static bool show_raw_data(false);
+    static bool show_data_robot(false);
 
     B2th remote_device ; //	00:06:66:7D:5C:AC //00:06:66:6E:00:C6
+    robot_data old_type_c ;
 
     sf::Clock repeatT_clock;
 
@@ -87,7 +92,8 @@ int main()
     strcat(version,AutoVersion::FULLVERSION_STRING);
     version[18]='\0';
 
-    string data_in("N/A");
+    std::string data_in;
+//    std::thread reception(remote_device.recv_from_remote_thread);
 
     window.setTitle(windowTitle);
 
@@ -125,6 +131,8 @@ int main()
             {
                 ImGui::MenuItem("Baricentre",NULL,&show_plot_line_window);
                 ImGui::MenuItem("Commande Led",NULL,&show_led_command);
+                ImGui::MenuItem("Raw Data","Beta",&show_raw_data);
+                ImGui::MenuItem("Set up robot","Beta",&show_data_robot);
                 ImGui::EndMenu();
             }
             ///ImGui::EndMenuBar();}
@@ -199,13 +207,13 @@ int main()
             repeatT_clock.restart();
         }
         data_in=remote_device.recv_from_remote();
-        ImGui::Text("raw : %s",data_in.c_str());
+        ImGui::TextUnformatted(remote_device.get_buff_rec().c_str());
         if (ImGui::Button("Effacer"))
         {
             // this code gets if user clicks on the button
             // yes, you could have written if(ImGui::InputText(...))
             // but I do this to show how buttons work :)
-            remote_device.clear_data_in();
+            remote_device.clear_buff_rec();
 
         }
         if(ImGui::Button("Deconnecter"))remote_device.close_connection();
@@ -247,9 +255,14 @@ int main()
 
         if(show_log_debug)debug_log.Draw("DEBUG/LOG",&show_log_debug);
 
+        if(show_raw_data)API::raw_data(remote_device,show_raw_data,data_in);
+
+        if(show_data_robot)API::set_up(remote_device,old_type_c,show_data_robot);
+
         window.clear(bgColor); // fill background with color
         ImGui::Render();
         window.display();
+        std::this_thread::yield();
     }
 
     ImGui::SFML::Shutdown();

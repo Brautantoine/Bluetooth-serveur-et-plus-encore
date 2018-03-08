@@ -175,11 +175,13 @@ copier imconfig-sfml dans imconfig
 		<Unit filename="include/ImGui_log_struct.hpp" />
 		<Unit filename="include/gestion_fichier.hpp" />
 		<Unit filename="include/remote_adress.h" />
+		<Unit filename="include/robot_data.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/API.cpp" />
 		<Unit filename="src/B2th.cpp" />
 		<Unit filename="src/gestion_fichier.cpp" />
 		<Unit filename="src/remote_adress.cpp" />
+		<Unit filename="src/robot_data.cpp" />
 		<Unit filename="version.h" />
 		<Extensions>
 			<DoxyBlocks>

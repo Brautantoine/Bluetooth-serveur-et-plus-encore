@@ -12,10 +12,14 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
 #include <vector>
+#include <queue>
 #include <string>
+#include <imgui.h>
 #include "remote_adress.h"
 #include "gestion_fichier.hpp"
 #include "../const_and_def.hpp"
+#include "thread"
+#include "robot_data.h"
 
 
 class B2th
@@ -35,16 +39,23 @@ class B2th
         int get_adr_number(){return rAddr.size();}                                                 // Renvoie le nombre total d'adresse charge
         int get_current_addr_pos(){return current_addr;}                                           // Renvoie le rang de l'adresse actuellement active
         std::string get_current_addr_detail(int current){return rAddr[current].get_fullstring();}  // Renvoie le chaine complete de definition de l'adresse (rang + adresse Mac + detail)
+        std::string get_data_raw(){return data_in;}
+        std::string get_buff_rec(){return buff_rec;}
+     //   std::queue <char> get_data_log(){return log;}
+        ImGuiTextBuffer get_log(){return log;}
 
         //Manipulation Bluetooth
         int connection();                                                                          // Connection vers l'adresse active (adresse 0 si aucune adresse active) et passage du socket en non bloquant /!\ AUCUN RETURN
         void send_to_remote();                                                                     // Envoie des donnees contenue dans rtx vers le peripherique bluetooth
-        void send_to_remote(char msg);                                                                     // Envoie des donnees contenue dans rtx vers le peripherique bluetooth
+        void send_to_remote(char msg);
+        void send_to_remote(std::queue <char> msg);                                                                   // Envoie des donnees contenue dans rtx vers le peripherique bluetooth
         void set_rtx(char* data);                                                                  // Modification des donnees de rtx
         void clear_data_in();                                                                      // Efface le buffer de reception
+        void clear_buff_rec();
         void close_connection();                                                                   // Ferme la connection
-        std::string recv_from_remote();                                                            // Ecoute les donnees entrante et les places dans le buffer
-        std::string recv_from_remote(int lenght);                                                  // Surcharge pour recevoir un nombre precis de donnees
+        std::string recv_from_remote();                                                     // Ecoute les donnees entrante et les places dans le buffer
+        std::vector<float> recv_from_remote(int lenght);                                           // Surcharge pour recevoir un nombre precis de donnees Out Of date
+        void recv_from_remote_thread();
 
         //Gestion du repertoire
         void create_default_txt();                                                                 // Creer un fichier texte ../config/adresse contenant les valeurs
@@ -55,13 +66,20 @@ class B2th
         void trig_adress(int pos);                                                                 // Rend une adresse active
         void ftrig_adress();                                                                       // Force l'activation de l'adresse 0
 
+        //fonction de manipulation de données
+        std::string vf_2_string(std::vector<float> data);                                          //Renvoie l'équivalent Ascii d'un tableau de float
+        std::queue<int> raw_2_fifo(unsigned char* data,int lenght);                                          //Remplie un vecteur de int avec les données en argument
+
+///        void bind_robot(robot_data& new_rob);
+
     protected:
     private:
 
         char* dest;
         std::string rtx;
         std::string data_in;
-        char buff_random[100];
+        std::string buff_rec;
+        //unsigned char buff_random[100];
 
         struct sockaddr_rc addr;
 
@@ -71,6 +89,15 @@ class B2th
         bool flag_Connect;
 
         std::vector <remote_adress> rAddr;
+
+        //std::queue <char> log;
+        ImGuiTextBuffer log;
+        int lines;
+
+      //  robot_data& otc;
+
+        std::thread reception;
+        //std::string msg_rec;
 };
 
 #endif // B2TH_H
