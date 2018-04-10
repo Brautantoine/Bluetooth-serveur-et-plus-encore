@@ -175,3 +175,32 @@ void API::test_rapide(B2th& remote_device)
 
 }
 
+void API::data_viewer(B2th& remote_device,bool& show_data_viewer)
+{
+/*
+    int nb_cycle(remote_device.get_data_current().Getiterateur());
+    int nb_cycle_suiv(nb_cycle);
+    ImGui::Begin("Data_viewer",&show_data_viewer);
+
+    if(nb_cycle>0)
+    {
+    vector<unsigned char> tab_buff(remote_device.get_data_current().get_current_data().Gettab());
+
+
+    ImGui::Text("mem_a",remote_device.get_data_current().get_current_data().Getpic_a());
+    ImGui::SameLine();
+    ImGui::Text("mem_b",remote_device.get_data_current().get_current_data().Getpic_b());
+    ImGui::PlotLines("filtre",(float*)tab_buff.data(),tab_buff.size(),0,NULL,FLT_MAX,FLT_MAX,ImVec2(0,127));
+    if(ImGui::Button("<<"))remote_device.get_data_current().last();
+    ImGui::SameLine();
+    if(ImGui::Button("Pause"))remote_device.get_data_current().diff_toggle();
+    ImGui::SameLine();
+    if(ImGui::Button(">>"))remote_device.get_data_current().next();
+    ImGui::SameLine();
+    ImGui::SliderInt("cycle",&nb_cycle_suiv,0,remote_device.get_data_current().Getiterateurmax());
+    if(nb_cycle_suiv!=nb_cycle)remote_device.get_data_current().set_current(nb_cycle_suiv);
+    }
+    ImGui::End();
+*/
+}
+
